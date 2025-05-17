@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, StyleSheet, Pressable } from "react-native";
 
-const ANIMATION_DURATION = 40000;
+const ANIMATION_DURATION = 60000;
 
 const BackgroundColorTransition = () => {
   const hueAnim = useRef(new Animated.Value(0)).current;
@@ -20,29 +20,29 @@ const BackgroundColorTransition = () => {
         startAnimation();
       });
 
-      // 채도(Saturation) 애니메이션: 60-80%
+      // 채도(Saturation) 애니메이션: 50-90%
       Animated.sequence([
         Animated.timing(saturationAnim, {
-          toValue: 80,
+          toValue: 90,
           duration: ANIMATION_DURATION / 2,
           useNativeDriver: false,
         }),
         Animated.timing(saturationAnim, {
-          toValue: 60,
+          toValue: 50,
           duration: ANIMATION_DURATION / 2,
           useNativeDriver: false,
         }),
       ]).start();
 
-      // 명도(Lightness) 애니메이션: 80-90%
+      // 명도(Lightness) 애니메이션: 75-95%
       Animated.sequence([
         Animated.timing(lightnessAnim, {
-          toValue: 90,
+          toValue: 95,
           duration: ANIMATION_DURATION / 2,
           useNativeDriver: false,
         }),
         Animated.timing(lightnessAnim, {
-          toValue: 80,
+          toValue: 75,
           duration: ANIMATION_DURATION / 2,
           useNativeDriver: false,
         }),
@@ -53,14 +53,20 @@ const BackgroundColorTransition = () => {
   }, []);
 
   const backgroundColor = hueAnim.interpolate({
-    inputRange: [0, 60, 120, 180, 240, 300, 360],
+    inputRange: [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360],
     outputRange: [
       "hsl(0, 70%, 85%)",
+      "hsl(30, 70%, 85%)",
       "hsl(60, 70%, 85%)",
+      "hsl(90, 70%, 85%)",
       "hsl(120, 70%, 85%)",
+      "hsl(150, 70%, 85%)",
       "hsl(180, 70%, 85%)",
+      "hsl(210, 70%, 85%)",
       "hsl(240, 70%, 85%)",
+      "hsl(270, 70%, 85%)",
       "hsl(300, 70%, 85%)",
+      "hsl(330, 70%, 85%)",
       "hsl(360, 70%, 85%)",
     ],
   });
