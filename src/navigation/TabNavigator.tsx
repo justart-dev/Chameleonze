@@ -32,19 +32,19 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
         style={{
           position: "absolute",
           bottom: 30,
-          left: 10,
-          right: 10,
+          left: 20,
+          right: 20,
           height: Platform.OS === "ios" ? 65 : 55,
-          borderRadius: 25,
+          borderRadius: 30,
           backgroundColor: "#F5F5F5",
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
-            height: 2,
+            height: 4,
           },
           shadowOpacity: 0.15,
-          shadowRadius: 3.84,
-          elevation: 5,
+          shadowRadius: 8,
+          elevation: 8,
           transform: [{ translateY }],
         }}
       >
@@ -87,7 +87,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                 <View style={{ flex: 1, alignItems: "center" }}>
                   <AntDesign
                     name={iconName as any}
-                    size={28}
+                    size={24}
                     color={isFocused ? "#4A4A4A" : "#9E9E9E"}
                   />
                 </View>
