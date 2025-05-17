@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Animated, StyleSheet, Pressable } from "react-native";
+import { Animated, StyleSheet, View } from "react-native";
 
 const ANIMATION_DURATION = 60000;
 
@@ -72,13 +72,9 @@ const BackgroundColorTransition = () => {
   });
 
   return (
-    <Pressable
-      style={[styles.container]}
-      android_ripple={null}
-      android_disableSound={true}
-    >
+    <View style={[styles.container]}>
       <Animated.View style={[styles.background, { backgroundColor }]} />
-    </Pressable>
+    </View>
   );
 };
 
