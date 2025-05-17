@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useRef } from "react";
 import { Animated, Easing } from "react-native";
+import { DISPLAY } from "../constants/display";
 
 interface TabBarVisibilityContextProps {
   showTabBar: () => void;
@@ -50,7 +51,7 @@ export const TabBarVisibilityProvider: React.FC<{
     if (hideTimer.current) clearTimeout(hideTimer.current);
     hideTimer.current = setTimeout(() => {
       hideTabBar();
-    }, 3000);
+    }, DISPLAY.DISPLAY_TIME);
   };
 
   return (
