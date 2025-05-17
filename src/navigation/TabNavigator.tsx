@@ -101,7 +101,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 }
 
 function TabNavigatorContent() {
-  const { showTabBar, resetHideTimer } = useTabBarVisibility();
+  const { showTabBar, resetHideTimer, hideTabBar } = useTabBarVisibility();
 
   return (
     <View style={{ flex: 1 }}>
@@ -109,29 +109,32 @@ function TabNavigatorContent() {
         tabBar={(props) => <CustomTabBar {...props} />}
         screenOptions={{
           headerShown: false,
+          tabBarStyle: {
+            display: "none",
+          },
+        }}
+        screenListeners={{
+          state: (e) => {
+            hideTabBar();
+          },
         }}
       >
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          listeners={{
-            tabPress: () => {
-              return true;
-            },
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="smileo" size={size} color={color} />
+            ),
           }}
         />
         <Tab.Screen
           name="MyPage"
           component={MyPageScreen}
-          listeners={{
-            tabPress: () => {
-              return true;
-            },
-            focus: () => {
-              showTabBar();
-              resetHideTimer();
-              return true;
-            },
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="user" size={size} color={color} />
+            ),
           }}
         />
       </Tab.Navigator>
