@@ -50,7 +50,7 @@ export const TabBarVisibilityProvider: React.FC<{
     if (hideTimer.current) clearTimeout(hideTimer.current);
     hideTimer.current = setTimeout(() => {
       hideTabBar();
-    }, 10000);
+    }, 3000);
   };
 
   return (
