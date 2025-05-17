@@ -14,7 +14,7 @@ import {
 } from "./TabBarVisibilityContext";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import MyPageScreen from "../screens/MyPageScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -65,7 +65,7 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
             let iconName: string | undefined = undefined;
             if (route.name === "Home") {
               iconName = "smileo";
-            } else if (route.name === "Profile") {
+            } else if (route.name === "MyPage") {
               iconName = "user";
             }
 
@@ -121,8 +121,8 @@ function TabNavigatorContent() {
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={ProfileScreen}
+          name="MyPage"
+          component={MyPageScreen}
           listeners={{
             tabPress: () => {
               return true;

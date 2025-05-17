@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { useTabBarVisibility } from "../navigation/TabBarVisibilityContext";
 import BackgroundColorTransition from "../components/BackgroundColorTransition";
 
-const ProfileScreen = () => {
+const MyPageScreen = () => {
   const { showTabBar, resetHideTimer } = useTabBarVisibility();
 
   const handleTouch = () => {
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default MyPageScreen;

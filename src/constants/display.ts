@@ -4,6 +4,7 @@ export const DISPLAY = {
 
   // 애니메이션 시간 (밀리초)
   ANIMATION: {
+    BACKGROUND_TRANSITION: 60000,
     FADE_IN: 300,
     FADE_OUT: 300,
     SCALE: 200,

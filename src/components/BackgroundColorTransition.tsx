@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Animated, StyleSheet, View } from "react-native";
+import { DISPLAY } from "../constants/display";
 
-const ANIMATION_DURATION = 60000;
+const { BACKGROUND_TRANSITION } = DISPLAY.ANIMATION;
 
 const BackgroundColorTransition = () => {
   const hueAnim = useRef(new Animated.Value(0)).current;
@@ -13,7 +14,7 @@ const BackgroundColorTransition = () => {
       // 색상(Hue) 애니메이션: 0-360도
       Animated.timing(hueAnim, {
         toValue: 360,
-        duration: ANIMATION_DURATION,
+        duration: BACKGROUND_TRANSITION,
         useNativeDriver: false,
       }).start(() => {
         hueAnim.setValue(0);
@@ -21,35 +22,46 @@ const BackgroundColorTransition = () => {
       });
 
       // 채도(Saturation) 애니메이션: 50-90%
-      Animated.sequence([
-        Animated.timing(saturationAnim, {
-          toValue: 90,
-          duration: ANIMATION_DURATION / 2,
-          useNativeDriver: false,
-        }),
-        Animated.timing(saturationAnim, {
-          toValue: 50,
-          duration: ANIMATION_DURATION / 2,
-          useNativeDriver: false,
-        }),
-      ]).start();
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(saturationAnim, {
+            toValue: 90,
+            duration: BACKGROUND_TRANSITION / 2,
+            useNativeDriver: false,
+          }),
+          Animated.timing(saturationAnim, {
+            toValue: 50,
+            duration: BACKGROUND_TRANSITION / 2,
+            useNativeDriver: false,
+          }),
+        ])
+      ).start();
 
       // 명도(Lightness) 애니메이션: 75-95%
-      Animated.sequence([
-        Animated.timing(lightnessAnim, {
-          toValue: 95,
-          duration: ANIMATION_DURATION / 2,
-          useNativeDriver: false,
-        }),
-        Animated.timing(lightnessAnim, {
-          toValue: 75,
-          duration: ANIMATION_DURATION / 2,
-          useNativeDriver: false,
-        }),
-      ]).start();
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(lightnessAnim, {
+            toValue: 95,
+            duration: BACKGROUND_TRANSITION / 2,
+            useNativeDriver: false,
+          }),
+          Animated.timing(lightnessAnim, {
+            toValue: 75,
+            duration: BACKGROUND_TRANSITION / 2,
+            useNativeDriver: false,
+          }),
+        ])
+      ).start();
     };
 
     startAnimation();
+
+    // 컴포넌트가 언마운트될 때 애니메이션 정리
+    return () => {
+      hueAnim.stopAnimation();
+      saturationAnim.stopAnimation();
+      lightnessAnim.stopAnimation();
+    };
   }, []);
 
   const backgroundColor = hueAnim.interpolate({
