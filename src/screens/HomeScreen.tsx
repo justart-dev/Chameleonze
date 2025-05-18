@@ -2,9 +2,11 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { useTabBarVisibility } from "../navigation/TabBarVisibilityContext";
 import BackgroundColorTransition from "../components/BackgroundColorTransition";
+import useStore from "../store/useStore";
 
 const HomeScreen = () => {
   const { showTabBar, resetHideTimer } = useTabBarVisibility();
+  const { selectedOption } = useStore();
 
   const handleTouch = () => {
     showTabBar();
@@ -14,7 +16,7 @@ const HomeScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={handleTouch}>
       <View style={styles.container}>
-        <BackgroundColorTransition />
+        {selectedOption === "chameleonze" && <BackgroundColorTransition />}
         <View style={styles.overlay}>
           <Text style={styles.text}>Noisli 스타일 배경화면</Text>
         </View>

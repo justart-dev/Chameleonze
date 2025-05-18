@@ -11,23 +11,19 @@ import { useTabBarVisibility } from "../navigation/TabBarVisibilityContext";
 import { useNavigation } from "@react-navigation/native";
 import Container from "../components/common/Container";
 import { Ionicons } from "@expo/vector-icons";
+import useStore from "../store/useStore";
 
 const MyPageScreen = () => {
   const { showTabBar, resetHideTimer } = useTabBarVisibility();
   const navigation = useNavigation();
-  const [selectedOption, setSelectedOption] = useState("chameleonze");
+  const { selectedOption, setSelectedOption } = useStore();
 
   const handleTouch = () => {
     showTabBar();
     resetHideTimer();
   };
-
   const handleContinue = () => {
     navigation.navigate("Home");
-  };
-
-  const handleOptionSelect = (option) => {
-    setSelectedOption(option);
   };
 
   return (
@@ -38,7 +34,7 @@ const MyPageScreen = () => {
             Choose a look you like from the home screen
           </Text>
           <Text style={styles.subDescription}>
-            In the quiet transitions, real rest begins.
+            Clean and simple — with more features on the way.
           </Text>
         </View>
         <View style={styles.optionContainer}>
@@ -49,8 +45,7 @@ const MyPageScreen = () => {
                 ? styles.selectedOption
                 : styles.unselectedOption,
             ]}
-            onPress={() => handleOptionSelect("chameleonze")}
-            activeOpacity={1}
+            onPress={() => setSelectedOption("chameleonze")} // 상태 업데이트
           >
             <View style={styles.textContainer}>
               <Ionicons
@@ -62,7 +57,7 @@ const MyPageScreen = () => {
               <Text style={styles.optionText}>Chameleonze</Text>
             </View>
             <Text style={styles.optionSubText}>
-              As the hues change, may your thoughts find stillness.
+              May your day flow as softly as the colors on the screen.
             </Text>
           </TouchableOpacity>
 
@@ -73,8 +68,7 @@ const MyPageScreen = () => {
                 ? styles.selectedOption
                 : styles.unselectedOption,
             ]}
-            onPress={() => handleOptionSelect("flipClock")}
-            activeOpacity={1}
+            onPress={() => setSelectedOption("flipClock")} // 상태 업데이트
           >
             <View style={styles.textContainer}>
               <Ionicons
@@ -87,25 +81,6 @@ const MyPageScreen = () => {
             </View>
             <Text style={styles.optionSubText}>
               A classic clock that quietly marks the rhythm of your day.
-            </Text>
-          </TouchableOpacity>
-
-          {/* 비활성화된 옵션 추가 */}
-          <TouchableOpacity
-            style={styles.disabledOptionButton}
-            disabled={true} // 비활성화 상태
-          >
-            <View style={styles.textContainer}>
-              <Ionicons
-                name="information-circle" // 아이콘 변경
-                size={24}
-                color="#ccc" // 비활성화된 아이콘 색상
-                style={styles.icon}
-              />
-              <Text style={styles.disabledOptionText}>Upcoming Feature</Text>
-            </View>
-            <Text style={styles.disabledOptionSubText}>
-              This feature will allow you to customize your experience further.
             </Text>
           </TouchableOpacity>
         </View>
