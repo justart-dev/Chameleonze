@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import useStore from "../store/useStore";
 
 const formatNumber = (num: number) => num.toString().padStart(2, "0");
 
 const FlipClock = () => {
   const [time, setTime] = useState(new Date());
+  const { isExpanded } = useStore();
 
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
@@ -21,11 +23,17 @@ const FlipClock = () => {
     <View style={styles.container}>
       <Text style={styles.ampm}>{ampm}</Text>
       <View style={styles.timeContainer}>
-        <Text style={styles.flip}>{hours}</Text>
+        <Text style={[styles.flip, isExpanded && styles.fullSizeFlip]}>
+          {hours}
+        </Text>
         <Text style={styles.colon}>:</Text>
-        <Text style={styles.flip}>{minutes}</Text>
+        <Text style={[styles.flip, isExpanded && styles.fullSizeFlip]}>
+          {minutes}
+        </Text>
         <Text style={styles.colon}>:</Text>
-        <Text style={styles.flip}>{seconds}</Text>
+        <Text style={[styles.flip, isExpanded && styles.fullSizeFlip]}>
+          {seconds}
+        </Text>
       </View>
     </View>
   );
@@ -53,14 +61,19 @@ const styles = StyleSheet.create({
     width: 80,
     textAlign: "center",
   },
+  fullSizeFlip: {
+    width: 200,
+    fontSize: 150,
+  },
   colon: {
     fontSize: 48,
     color: "white",
     paddingHorizontal: 5,
   },
   ampm: {
-    fontSize: 24,
+    fontSize: 26,
     color: "white",
+    fontWeight: "bold",
     alignSelf: "center",
     marginRight: 10,
   },

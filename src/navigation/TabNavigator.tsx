@@ -11,7 +11,7 @@ import {
 import {
   TabBarVisibilityProvider,
   useTabBarVisibility,
-} from "./TabBarVisibilityContext";
+} from "../contexts/TabBarVisibilityContext";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/HomeScreen";
 import MyPageScreen from "../screens/MyPageScreen";

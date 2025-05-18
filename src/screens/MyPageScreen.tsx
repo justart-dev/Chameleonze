@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
-import { useTabBarVisibility } from "../navigation/TabBarVisibilityContext";
+import { useTabBarVisibility } from "../contexts/TabBarVisibilityContext";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Container from "../components/common/Container";

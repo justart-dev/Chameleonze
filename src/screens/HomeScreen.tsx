@@ -6,26 +6,48 @@ import {
   TouchableWithoutFeedback,
   Animated,
 } from "react-native";
-import { useTabBarVisibility } from "../navigation/TabBarVisibilityContext";
+import { useTabBarVisibility } from "../contexts/TabBarVisibilityContext";
 import BackgroundColorTransition from "../components/BackgroundColorTransition";
 import useStore from "../store/useStore";
 import FlipClock from "../components/FlipClock";
 import * as ScreenOrientation from "expo-screen-orientation";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { DISPLAY } from "../constants/display";
+import { useFocusEffect } from "@react-navigation/native";
 
 const HomeScreen = () => {
   const { showTabBar, resetHideTimer } = useTabBarVisibility();
-  const { selectedOption } = useStore();
+  const { selectedOption, isExpanded, setExpanded } = useStore();
   const [isPortrait, setIsPortrait] = useState(true);
   const [showOrientationIcons, setShowOrientationIcons] = useState(false);
   const [iconAnimation] = useState(new Animated.Value(0));
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const lockOrientation = async () => {
+        await ScreenOrientation.lockAsync(
+          ScreenOrientation.OrientationLock.PORTRAIT_UP
+        );
+        setIsPortrait(true);
+      };
+
+      lockOrientation();
+
+      // 페이지가 포커스될 때 isZoomed 상태 초기화
+      setExpanded(false);
+
+      return () => {
+        ScreenOrientation.unlockAsync();
+      };
+    }, [setExpanded])
+  );
 
   const setPortrait = async () => {
     await ScreenOrientation.lockAsync(
       ScreenOrientation.OrientationLock.PORTRAIT_UP
     );
     setIsPortrait(true);
+    setExpanded(!isExpanded);
   };
 
   const setLandscape = async () => {
@@ -33,6 +55,7 @@ const HomeScreen = () => {
       ScreenOrientation.OrientationLock.LANDSCAPE
     );
     setIsPortrait(false);
+    setExpanded(!isExpanded);
   };
 
   const handleTouch = () => {
@@ -62,9 +85,13 @@ const HomeScreen = () => {
 
         <View style={styles.overlay}>
           {selectedOption === "chameleonze" && (
-            <Text style={styles.text}>Noisli 스타일 배경화면</Text>
+            <Text style={styles.text}>Chameleonze.</Text>
           )}
-          {selectedOption === "flipClock" && <FlipClock />}
+          {selectedOption === "flipClock" && (
+            <View style={styles.clockContainer}>
+              <FlipClock />
+            </View>
+          )}
         </View>
 
         {showOrientationIcons && (
@@ -115,7 +142,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 1,
   },
   text: {
     fontSize: 24,
@@ -133,6 +159,7 @@ const styles = StyleSheet.create({
   iconButton: {
     backgroundColor: "white",
     padding: 10,
+    margin: 4,
     borderRadius: 30,
     alignItems: "center",
     shadowColor: "#000",
@@ -142,6 +169,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.15,
     shadowRadius: 8,
+  },
+  clockContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "black",
+    width: "100%",
   },
 });
 
