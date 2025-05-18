@@ -15,7 +15,7 @@ const FlipClock = () => {
   const hours = formatNumber(hours24 % 12 || 12); // 12시간 형식으로 변환
   const minutes = formatNumber(time.getMinutes());
   const seconds = formatNumber(time.getSeconds());
-  const ampm = hours24 < 12 ? "AM" : "PM"; // AM/PM 구분
+  const ampm = hours24 < 12 ? "AM" : "PM";
 
   return (
     <View style={styles.container}>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     padding: 20,
     borderRadius: 12,
-    alignItems: "center", // 수직 정렬
+    alignItems: "center",
   },
   timeContainer: {
     flexDirection: "row",
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#222",
     padding: 10,
     borderRadius: 8,
-    width: 80, // 고정된 너비 설정
-    textAlign: "center", // 텍스트 중앙 정렬
+    width: 80,
+    textAlign: "center",
   },
   colon: {
     fontSize: 48,
@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
   ampm: {
     fontSize: 24,
     color: "white",
-    alignSelf: "center", // 수직 정렬
-    marginRight: 10, // 약간의 여백 추가
+    alignSelf: "center",
+    marginRight: 10,
   },
 });
 

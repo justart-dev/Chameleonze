@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -52,7 +52,7 @@ const MyPageScreen = () => {
                 ? styles.selectedOption
                 : styles.unselectedOption,
             ]}
-            onPress={() => setSelectedOption("chameleonze")} // 상태 업데이트
+            onPress={() => setSelectedOption("chameleonze")}
           >
             <View style={styles.textContainer}>
               <Ionicons
@@ -75,7 +75,7 @@ const MyPageScreen = () => {
                 ? styles.selectedOption
                 : styles.unselectedOption,
             ]}
-            onPress={() => setSelectedOption("flipClock")} // 상태 업데이트
+            onPress={() => setSelectedOption("flipClock")}
           >
             <View style={styles.textContainer}>
               <Ionicons
@@ -139,14 +139,14 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   selectedOption: {
-    borderColor: "#000", // 선택된 옵션의 테두리 색상
-    borderWidth: 2, // 테두리 두께
-    backgroundColor: "#F5F5F5", // 배경색
+    borderColor: "#000",
+    borderWidth: 2,
+    backgroundColor: "#F5F5F5",
   },
   unselectedOption: {
-    borderColor: "#ccc", // 선택되지 않은 옵션의 테두리 색상
-    borderWidth: 2, // 테두리 두께
-    backgroundColor: "#F5F5F5", // 배경색
+    borderColor: "#ccc",
+    borderWidth: 2,
+    backgroundColor: "#F5F5F5",
   },
   disabledOptionButton: {
     flexDirection: "column",
@@ -156,17 +156,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
     width: "100%",
-    borderColor: "#ccc", // 비활성화된 옵션의 테두리 색상
-    borderWidth: 2, // 테두리 두께
+    borderColor: "#ccc",
+    borderWidth: 2,
   },
   disabledOptionText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#ccc", // 비활성화된 텍스트 색상
+    color: "#ccc",
   },
   disabledOptionSubText: {
     fontSize: 16,
-    color: "#ccc", // 비활성화된 서브 텍스트 색상
+    color: "#ccc",
     marginTop: 5,
   },
   textContainer: {
