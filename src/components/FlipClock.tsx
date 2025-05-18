@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import useStore from "../store/useStore";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 const formatNumber = (num: number) => num.toString().padStart(2, "0");
 
@@ -62,8 +63,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   fullSizeFlip: {
+    // Todo : app에서는 font size가 동적이지 않으므로 헬퍼함수를 이용하던가 라이브러리를 사용해야한다.
+    // 나중에 디바이스 체크 할 것.
     width: 200,
-    fontSize: 150,
+    fontSize: RFPercentage(18),
   },
   colon: {
     fontSize: 48,
