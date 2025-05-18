@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -9,13 +9,20 @@ import {
 } from "react-native";
 import { useTabBarVisibility } from "../navigation/TabBarVisibilityContext";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Container from "../components/common/Container";
 import { Ionicons } from "@expo/vector-icons";
 import useStore from "../store/useStore";
 
+type RootStackParamList = {
+  Home: undefined; // Home 화면에 전달할 파라미터가 없음을 나타냄
+  MyPage: undefined; // MyPage 화면에 전달할 파라미터가 없음을 나타냄
+};
+
 const MyPageScreen = () => {
   const { showTabBar, resetHideTimer } = useTabBarVisibility();
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { selectedOption, setSelectedOption } = useStore();
 
   const handleTouch = () => {
